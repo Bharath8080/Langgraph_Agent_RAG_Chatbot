@@ -55,7 +55,7 @@ def load_environment_vars():
     import os
     
     # Load .env file from the same directory as the script
-    env_path = os.path.join(os.path.dirname(_file_), '.env')
+    env_path = os.path.join(os.path.dirname(__file__), '.env')
     if os.path.exists(env_path):
         load_dotenv(env_path, override=True)
         print(f"✅ Loaded environment variables from: {env_path}")
