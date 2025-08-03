@@ -16,4 +16,5 @@ PyMuPDF
 python-docx
 python-dotenv
 faiss-cpu
+langchain-google-genai
 
