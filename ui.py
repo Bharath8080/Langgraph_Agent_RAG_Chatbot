@@ -100,7 +100,7 @@ def show_agent_controls():
 
 def show_chat_interface():
     """Show the main chat interface"""
-    st.header("💬 Chat with your Agent")
+    # st.header("💬 Chat with your Agent")
     
     # Display chat messages
     for message in st.session_state.messages:
@@ -150,7 +150,7 @@ def main():
     )
     
     st.title("🤖 LangGraph RAG Agent with Gemini")
-    st.markdown("An intelligent agent that can search your documents and the web using Google's Gemini models")
+    # st.markdown("An intelligent agent that can search your documents and the web using Google's Gemini models")
     
     # Initialize session state
     initialize_session_state()
