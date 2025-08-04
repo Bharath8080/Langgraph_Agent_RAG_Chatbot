@@ -9,41 +9,66 @@ import os
 # LangChain imports
 from langchain_core.documents import Document
 from langchain_community.document_loaders import (
-    PyPDFLoader, Docx2txtLoader, TextLoader, UnstructuredMarkdownLoader
+    PyPDFLoader, Docx2txtLoader, TextLoader, UnstructuredMarkdownLoader, WebBaseLoader
 )
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import CohereEmbeddings
 
-def load_documents_from_files(uploaded_files) -> List[Document]:
-    """Load documents from uploaded files"""
+def load_documents_from_files(uploaded_files=None, urls=None) -> List[Document]:
+    """
+    Load documents from uploaded files and/or URLs
+    
+    Args:
+        uploaded_files: List of uploaded file objects
+        urls: List of URLs to load content from
+        
+    Returns:
+        List of Document objects
+    """
     documents = []
     
-    with tempfile.TemporaryDirectory() as temp_dir:
-        for uploaded_file in uploaded_files:
-            # Save uploaded file to temp directory
-            file_path = os.path.join(temp_dir, uploaded_file.name)
-            with open(file_path, "wb") as f:
-                f.write(uploaded_file.getbuffer())
-            
-            # Load document based on file type
+    # Process uploaded files if any
+    if uploaded_files:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            for uploaded_file in uploaded_files:
+                # Save uploaded file to temp directory
+                file_path = os.path.join(temp_dir, uploaded_file.name)
+                with open(file_path, "wb") as f:
+                    f.write(uploaded_file.getbuffer())
+                
+                # Load document based on file type
+                try:
+                    if uploaded_file.name.endswith('.pdf'):
+                        loader = PyPDFLoader(file_path)
+                    elif uploaded_file.name.endswith('.docx'):
+                        loader = Docx2txtLoader(file_path)
+                    elif uploaded_file.name.endswith('.txt'):
+                        loader = TextLoader(file_path)
+                    elif uploaded_file.name.endswith('.md'):
+                        loader = UnstructuredMarkdownLoader(file_path)
+                    else:
+                        print(f"Unsupported file type: {uploaded_file.name}")
+                        continue
+                    
+                    documents.extend(loader.load())
+                    
+                except Exception as e:
+                    print(f"❌ Error loading {uploaded_file.name}: {str(e)}")
+    
+    # Process URLs if any
+    if urls:
+        for url in urls:
+            if not url.strip():
+                continue
+                
             try:
-                if uploaded_file.name.endswith('.pdf'):
-                    loader = PyPDFLoader(file_path)
-                elif uploaded_file.name.endswith('.docx'):
-                    loader = Docx2txtLoader(file_path)
-                elif uploaded_file.name.endswith('.txt'):
-                    loader = TextLoader(file_path)
-                elif uploaded_file.name.endswith('.md'):
-                    loader = UnstructuredMarkdownLoader(file_path)
-                else:
-                    print(f"Unsupported file type: {uploaded_file.name}")
-                    continue
-                
+                print(f"Loading URL: {url}")
+                loader = WebBaseLoader(url)
                 documents.extend(loader.load())
-                
+                print(f"Successfully loaded URL: {url}")
             except Exception as e:
-                print(f"❌ Error loading {uploaded_file.name}: {str(e)}")
+                print(f"❌ Error loading URL {url}: {str(e)}")
     
     return documents
 
