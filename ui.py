@@ -17,8 +17,26 @@ from scripts.main import (
 )
 from scripts.rag import load_documents_from_files, create_vector_index
 
+def load_environment_vars() -> bool:
+    """Load environment variables from .env file"""
+    from dotenv import load_dotenv
+    import os
+    
+    # Try to load from the root directory
+    env_path = os.path.join(os.path.dirname(__file__), '.env')
+    if os.path.exists(env_path):
+        load_dotenv(env_path, override=True)
+        print(f"✅ Loaded environment variables from: {env_path}")
+        return True
+    else:
+        print(f"⚠ Warning: .env file not found at {env_path}")
+        return False
+
 def initialize_session_state():
     """Initialize session state variables"""
+    # First load environment variables
+    load_environment_vars()
+    
     if 'agent' not in st.session_state:
         st.session_state.agent = None
     if 'retriever' not in st.session_state:
@@ -58,8 +76,10 @@ def show_api_config(api_keys: Dict[str, str]) -> bool:
     return True
 
 def show_document_upload():
-    """Show document upload interface"""
-    st.sidebar.header("📄 Document Upload")
+    """Show document upload and URL input interface"""
+    st.sidebar.header("📄 Document & URL Input")
+    
+    # Document upload
     uploaded_files = st.sidebar.file_uploader(
         "Upload your documents",
         type=['pdf', 'docx', 'txt', 'md'],
@@ -67,16 +87,47 @@ def show_document_upload():
         help="Upload PDF, DOCX, TXT, or MD files to create your knowledge base"
     )
     
-    # Process uploaded files
-    if uploaded_files and st.sidebar.button("🔄 Process Documents"):
-        with st.spinner("Processing documents..."):
-            documents = load_documents_from_files(uploaded_files)
+    # URL input
+
+    st.sidebar.subheader("🌐 Or add web pages")
+    url_input = st.sidebar.text_area(
+        "Enter URLs (one per line)",
+        placeholder="https://example.com\nhttps://another-example.com",
+        height=100
+    )
+    
+    process_btn = st.sidebar.button("🔄 Process Content")
+    
+    if process_btn and (uploaded_files or url_input.strip()):
+        with st.spinner("Processing content..."):
+            # Process URLs
+            urls = [url.strip() for url in url_input.split('\n') if url.strip()]
+            
+            # Load documents from both files and URLs
+            documents = load_documents_from_files(
+                uploaded_files=uploaded_files,
+                urls=urls
+            )
+            
             if documents:
                 retriever, vectordb = create_vector_index(documents)
                 if retriever and vectordb:
                     st.session_state.retriever = retriever
                     st.session_state.vectordb = vectordb
-                    st.sidebar.success(f"✅ Processed {len(documents)} documents")
+                    
+                    # Show success message with counts
+                    file_count = len(uploaded_files) if uploaded_files else 0
+                    url_count = len(urls) if url_input.strip() else 0
+                    
+                    msg = "✅ Processed "
+                    if file_count > 0:
+                        msg += f"{file_count} document{'s' if file_count > 1 else ''} "
+                    if file_count > 0 and url_count > 0:
+                        msg += "and "
+                    if url_count > 0:
+                        msg += f"{url_count} URL{'s' if url_count > 1 else ''} "
+                    
+                    st.sidebar.success(msg.strip())
                 else:
                     st.sidebar.error("❌ Failed to create vector index")
 
@@ -100,7 +151,7 @@ def show_agent_controls():
 
 def show_chat_interface():
     """Show the main chat interface"""
-    st.header("💬 Chat with your Agent")
+    # st.header("💬 Chat with your Agent")
     
     # Display chat messages
     for message in st.session_state.messages:
@@ -150,7 +201,7 @@ def main():
     )
     
     st.title("🤖 LangGraph RAG Agent with Gemini")
-    st.markdown("An intelligent agent that can search your documents and the web using Google's Gemini models")
+    
     
     # Initialize session state
     initialize_session_state()
