@@ -42,17 +42,17 @@ def create_agent(retriever=None):
     
     # Initialize Gemini LLMs
     router_llm = ChatGoogleGenerativeAI(
-        model="gemini-1.5-flash",
+        model="gemini-2.5-flash",
         temperature=0
     ).with_structured_output(RouteDecision)
     
     judge_llm = ChatGoogleGenerativeAI(
-        model="gemini-1.5-flash",
+        model="gemini-2.5-flash",
         temperature=0
     ).with_structured_output(RagJudge)
     
     answer_llm = ChatGoogleGenerativeAI(
-        model="gemini-1.5-flash",
+        model="gemini-2.5-flash",
         temperature=0.7
     )
     
