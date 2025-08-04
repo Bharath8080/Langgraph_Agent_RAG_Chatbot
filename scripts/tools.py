@@ -16,7 +16,7 @@ class Tools:
         def web_search_tool(query: str) -> str:
             """Up-to-date web info via Tavily"""
             try:
-                tavily = TavilySearch(max_results=3, topic="general")
+                tavily = TavilySearch(max_results=3, search_depth="advanced",topic="general")
                 result = tavily.invoke({"query": query})
                 
                 if isinstance(result, dict) and 'results' in result:
