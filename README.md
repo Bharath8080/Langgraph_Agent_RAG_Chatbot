@@ -2,14 +2,7 @@
 
 A powerful Retrieval-Augmented Generation (RAG) chatbot built with LangGraph, designed to provide accurate and context-aware responses by leveraging external knowledge sources.
 
-<div style="display: flex; justify-content: space-between; gap: 20px; margin: 20px 0; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 10px;">
-    <div style="flex: 0 0 auto; width: 48%;">
-        <img src="https://github.com/Bharath8080/Langgraph_Agentic_RAG_ChatBOT/raw/main/assets/agent_workflow.png" alt="Agent Workflow" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    </div>
-    <div style="flex: 0 0 auto; width: 48%;">
-        <img src="https://github.com/Bharath8080/Langgraph_Agentic_RAG_ChatBOT/raw/main/assets/rag%20agent%20flow%20minimal.png" alt="RAG Agent Flow Minimal" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    </div>
-</div>
+![Agent Workflow](https://github.com/Bharath8080/Langgraph_Agentic_RAG_ChatBOT/raw/main/assets/agent_workflow.png)
 
 ## 🌐 Live Demo
 
