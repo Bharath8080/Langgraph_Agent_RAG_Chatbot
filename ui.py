@@ -5,7 +5,8 @@ import streamlit as st
 import os
 from typing import List, Dict, Any
 from pathlib import Path
-
+from dotenv import load_dotenv
+load_dotenv()
 # Import core functionality from scripts
 from scripts.main import (
     create_agent,
