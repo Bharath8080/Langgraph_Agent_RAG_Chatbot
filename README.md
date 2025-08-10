@@ -97,3 +97,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Thanks to the LangChain team for their amazing tools
 - The open-source community for their contributions
 - All the model providers that make this project possible
+![Image](https://github.com/user-attachments/assets/dc5a4830-b992-41c1-a53e-7ce356813e09)
