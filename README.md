@@ -6,7 +6,7 @@ A powerful Retrieval-Augmented Generation (RAG) chatbot built with LangGraph, de
 
 ## 🌐 Live Demo
 
-Try out the live demo of the application: [LangGraph Agentic RAG Chatbot](https://langgraphagenticragchatbot.streamlit.app/)
+Try out the live demo of the application: [LangGraph Agentic RAG Chatbot](https://langgraph-agentic-rag-chatbot.onrender.com)
 
 ## 🚀 Features
 
