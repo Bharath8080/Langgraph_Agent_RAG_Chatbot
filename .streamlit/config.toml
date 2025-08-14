@@ -1,33 +1,22 @@
 [server]
 enableStaticServing = true
 
-[[theme.fontFaces]]
-family = "SpaceGrotesk"
-url = "app/static/SpaceGrotesk-VariableFont_wght.ttf"
+# Bold and stylish font options - choose one of these setups:
 
+# Option 1: Poppins (Modern, bold, very stylish)
 [[theme.fontFaces]]
-family = "SpaceMono"
-url = "app/static/SpaceMono-Bold.ttf"
-style = "normal"
-weight = 700
+family = "Poppins"
+url = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
 
-[[theme.fontFaces]]
-family = "SpaceMono"
-url = "app/static/SpaceMono-BoldItalic.ttf"
-style = "italic"
-weight = 700
+# Option 2: Montserrat (Clean, bold, professional)
+# [[theme.fontFaces]]
+# family = "Montserrat"
+# url = "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
 
+# Code font - JetBrains Mono (stylish monospace)
 [[theme.fontFaces]]
-family = "SpaceMono"
-url = "app/static/SpaceMono-Italic.ttf"
-style = "italic"
-weight = 400
-
-[[theme.fontFaces]]
-family = "SpaceMono"
-url = "app/static/SpaceMono-Regular.ttf"
-style = "normal"
-weight = 400
+family = "JetBrains Mono"
+url = "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
 
 [theme]
 primaryColor = "#cb785c"
@@ -39,11 +28,11 @@ borderColor = "#d3d2ca"
 showWidgetBorder = true
 baseRadius = "0.75rem"
 buttonRadius = "full"
-font = "SpaceGrotesk"
-# Increased font weights for thicker text
-headingFontWeights = [700, 600, 600, 600, 600, 600]
+font = "Poppins"
+# Bold and stylish font weights
+headingFontWeights = [800, 700, 600, 600, 500, 500]
 headingFontSizes = ["3rem", "2rem"]
-codeFont = "SpaceMono"
+codeFont = "JetBrains Mono"
 codeFontSize = ".75rem"
 codeBackgroundColor = "#ecebe4"
 showSidebarBorder = true
