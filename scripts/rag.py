@@ -13,7 +13,7 @@ from langchain_community.document_loaders import (
 )
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import CohereEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 def load_documents_from_files(uploaded_files) -> List[Document]:
     """Load documents from uploaded files"""
@@ -48,7 +48,7 @@ def load_documents_from_files(uploaded_files) -> List[Document]:
     return documents
 
 def create_vector_index(documents: List[Document]) -> Tuple[Any, Any]:
-    """Create a vector index from documents using Cohere embeddings with FAISS"""
+    """Create a vector index from documents using HuggingFace embeddings with FAISS"""
     
     if not documents:
         print("No documents to process!")
@@ -64,11 +64,10 @@ def create_vector_index(documents: List[Document]) -> Tuple[Any, Any]:
     chunks = text_splitter.split_documents(documents)
     
     try:
-        # Create embeddings using Cohere
-        embeddings = CohereEmbeddings(
-            model="embed-english-v3.0",
-            cohere_api_key=os.getenv("COHERE_API_KEY"),
-            user_agent="langchain-app"
+        # Create embeddings using HuggingFace
+        embeddings = HuggingFaceEmbeddings(
+            model_name="all-MiniLM-L6-v2",
+            model_kwargs={'device': 'cpu'}
         )
         
         # Create FAISS vector store
