@@ -92,7 +92,7 @@ def show_document_upload():
 
 def show_agent_controls():
     """Show agent initialization controls"""
-    st.sidebar.header("🤖 Agent Controls")
+    st.sidebar.header(" ⚙ Agent Controls")
     
     # Initialize agent button
     if st.sidebar.button("🚀 Initialize Agent"):
