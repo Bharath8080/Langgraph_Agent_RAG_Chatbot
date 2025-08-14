@@ -1,45 +1,133 @@
 [server]
 enableStaticServing = true
 
-# Bold and stylish font options - choose one of these setups:
-
-# Option 1: Poppins (Modern, bold, very stylish)
 [[theme.fontFaces]]
 family = "Poppins"
-url = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+url = "app/static/Poppins-Thin.ttf"
+style = "normal"
+weight = "100"
 
-# Option 2: Montserrat (Clean, bold, professional)
-# [[theme.fontFaces]]
-# family = "Montserrat"
-# url = "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-
-# Code font - JetBrains Mono (stylish monospace)
 [[theme.fontFaces]]
-family = "JetBrains Mono"
-url = "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+family = "Poppins"
+url = "app/static/Poppins-ExtraLight.ttf"
+style = "normal"
+weight = "200"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Light.ttf"
+style = "normal"
+weight = "300"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Regular.ttf"
+style = "normal"
+weight = "400"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Medium.ttf"
+style = "normal"
+weight = "500"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-SemiBold.ttf"
+style = "normal"
+weight = "600"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Bold.ttf"
+style = "normal"
+weight = "700"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-ExtraBold.ttf"
+style = "normal"
+weight = "800"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Black.ttf"
+style = "normal"
+weight = "900"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-ThinItalic.ttf"
+style = "italic"
+weight = "100"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-ExtraLightItalic.ttf"
+style = "italic"
+weight = "200"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-LightItalic.ttf"
+style = "italic"
+weight = "300"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-Italic.ttf"
+style = "italic"
+weight = "400"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-MediumItalic.ttf"
+style = "italic"
+weight = "500"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-SemiBoldItalic.ttf"
+style = "italic"
+weight = "600"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-BoldItalic.ttf"
+style = "italic"
+weight = "700"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-ExtraBoldItalic.ttf"
+style = "italic"
+weight = "800"
+
+[[theme.fontFaces]]
+family = "Poppins"
+url = "app/static/Poppins-BlackItalic.ttf"
+style = "italic"
+weight = "900"
 
 [theme]
-primaryColor = "#cb785c"
-backgroundColor = "#fdfdf8"
-secondaryBackgroundColor = "#ecebe3"
-textColor = "#3d3a2a"
-linkColor = "#3d3a2a"
-borderColor = "#d3d2ca"
+base = "dark"
+primaryColor = "#1ed760"
+backgroundColor = "#2a2a2a"
+secondaryBackgroundColor = "#121212"
+codeBackgroundColor = "#121212"
+textColor = "#ffffff"
+linkColor = "#1ed760"
+borderColor = "#7c7c7c"
 showWidgetBorder = true
-baseRadius = "0.75rem"
+baseRadius = "0.3rem"
 buttonRadius = "full"
 font = "Poppins"
-# Bold and stylish font weights
-headingFontWeights = [800, 700, 600, 600, 500, 500]
-headingFontSizes = ["3rem", "2rem"]
-codeFont = "JetBrains Mono"
-codeFontSize = ".75rem"
-codeBackgroundColor = "#ecebe4"
-showSidebarBorder = true
-chartCategoricalColors = ["#0ea5e9", "#059669", "#fbbf24"]
+headingFontWeights = [600, 500, 500, 500, 500, 500]
+headingFontSizes = ["3rem", "2.5rem", "2.25rem", "2rem", "1.5rem"]
+chartCategoricalColors = ["#ffc862", "#2d46b9", "#b49bc8"]
 
 [theme.sidebar]
-backgroundColor = "#f0f0ec"
-secondaryBackgroundColor = "#ecebe3"
-headingFontSizes = ["1.6rem", "1.4rem", "1.2rem"]
-dataframeHeaderBackgroundColor = "#e4e4e0"
+backgroundColor = "#121212"
+secondaryBackgroundColor = "#000000"
+codeBackgroundColor = "#2a2a2a"
+borderColor = "#696969"
