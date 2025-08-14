@@ -164,24 +164,30 @@ Provide a helpful, accurate, and concise response based on the available informa
 
 def setup_environment() -> tuple[bool, dict[str, str]]:
     """Setup API keys and environment variables"""
-    # Get API keys from environment variables
-    google_api_key = os.getenv("GOOGLE_API_KEY", "")
-    tavily_api_key = os.getenv("TAVILY_API_KEY", "")
-    cohere_api_key = os.getenv("COHERE_API_KEY", "")
+    # Try to get API keys from Streamlit secrets first
+    try:
+        import streamlit as st
+        if hasattr(st, 'secrets'):
+            google_api_key = st.secrets.get("GOOGLE_API_KEY", "")
+            tavily_api_key = st.secrets.get("TAVILY_API_KEY", "")
+    except:
+        google_api_key = ""
+        tavily_api_key = ""
+    
+    # Fall back to environment variables if not in Streamlit
+    google_api_key = google_api_key or os.getenv("GOOGLE_API_KEY", "")
+    tavily_api_key = tavily_api_key or os.getenv("TAVILY_API_KEY", "")
     
     # Check if all required API keys are present
-    all_keys_present = bool(google_api_key and tavily_api_key and cohere_api_key)
+    all_keys_present = bool(google_api_key and tavily_api_key)
     
     # Set environment variables (in case they weren't already set)
     if google_api_key:
         os.environ["GOOGLE_API_KEY"] = google_api_key
     if tavily_api_key:
         os.environ["TAVILY_API_KEY"] = tavily_api_key
-    if cohere_api_key:
-        os.environ["COHERE_API_KEY"] = cohere_api_key
     
     return all_keys_present, {
         "google_api_key": google_api_key,
-        "tavily_api_key": tavily_api_key,
-        "cohere_api_key": cohere_api_key
+        "tavily_api_key": tavily_api_key
     }
