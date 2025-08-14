@@ -1,11 +1,9 @@
 streamlit
 langgraph
 langchain
-langchain-groq
 langchain-community
 langchain-tavily
 langchain-core
-langchain-cohere
 pypdf
 docx2txt
 unstructured
@@ -17,4 +15,6 @@ python-docx
 python-dotenv
 faiss-cpu
 langchain-google-genai
+langchain-huggingface
+sentence-transformers
 
