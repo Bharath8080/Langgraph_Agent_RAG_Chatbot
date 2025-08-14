@@ -5,6 +5,12 @@ from typing import List, Optional, Any, Tuple
 from pathlib import Path
 import tempfile
 import os
+import logging
+import fitz  # PyMuPDF
+
+# Suppress PyMuPDF warnings
+logging.getLogger('fitz').setLevel(logging.ERROR)
+logging.getLogger('pymupdf').setLevel(logging.ERROR)
 
 # LangChain imports
 from langchain_core.documents import Document
