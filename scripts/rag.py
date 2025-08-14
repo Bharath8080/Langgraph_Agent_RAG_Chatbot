@@ -22,7 +22,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 
 def load_documents_from_files(uploaded_files) -> List[Document]:
-    """Load documents from uploaded files with enhanced metadata"""
+    """Load documents from uploaded files"""
     documents = []
     
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -46,15 +46,7 @@ def load_documents_from_files(uploaded_files) -> List[Document]:
                     print(f"Unsupported file type: {uploaded_file.name}")
                     continue
                 
-                # Load and enhance documents with metadata
-                loaded_docs = loader.load()
-                for doc in loaded_docs:
-                    doc.metadata.update({
-                        'source': uploaded_file.name,
-                        'file_type': os.path.splitext(uploaded_file.name)[1],
-                        'total_pages': len(loaded_docs) if hasattr(loader, 'load_and_split') else 1
-                    })
-                documents.extend(loaded_docs)
+                documents.extend(loader.load())
                 
             except Exception as e:
                 print(f"❌ Error loading {uploaded_file.name}: {str(e)}")
@@ -62,54 +54,36 @@ def load_documents_from_files(uploaded_files) -> List[Document]:
     return documents
 
 def create_vector_index(documents: List[Document]) -> Tuple[Any, Any]:
-    """Create a vector index from documents using enhanced settings for better accuracy"""
+    """Create a vector index from documents using HuggingFace embeddings with FAISS"""
     
     if not documents:
         print("No documents to process!")
         return None, None
         
-    # Enhanced text splitting with better chunking strategy
+    # Split documents into chunks
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,  # Smaller chunks for more focused retrieval
-        chunk_overlap=200,  # Increased overlap for better context
-        length_function=len,
-        separators=["\n\n", "\n", ". ", " ", ""],  # Better separation of content
-        is_separator_regex=False
+        chunk_size=1000,
+        chunk_overlap=200,
+        length_function=len
     )
     
-    # Process and split documents
     chunks = text_splitter.split_documents(documents)
     
-    # Add position information to metadata
-    for i, chunk in enumerate(chunks):
-        chunk.metadata['chunk_id'] = i
-        if 'page' not in chunk.metadata:
-            chunk.metadata['page'] = 1
-    
     try:
-        # Use a more powerful embedding model
+        # Create embeddings using HuggingFace
         embeddings = HuggingFaceEmbeddings(
-            model_name="sentence-transformers/all-MiniLM-L6-v2",  # Better quality embeddings
-            model_kwargs={'device': 'cpu'},
-            encode_kwargs={'normalize_embeddings': True}  # Normalize for better similarity
+            model_name="all-MiniLM-L6-v2",
+            model_kwargs={'device': 'cpu'}
         )
         
-        # Create FAISS vector store with better indexing
+        # Create FAISS vector store
         vectordb = FAISS.from_documents(
             documents=chunks,
-            embedding=embeddings,
-            distance_strategy="COSINE"  # Better for semantic search
+            embedding=embeddings
         )
         
-        # Enhanced retriever with MMR (Maximal Marginal Relevance) for better diversity
-        retriever = vectordb.as_retriever(
-            search_type="mmr",  # Use MMR for better result diversity
-            search_kwargs={
-                'k': 5,  # Retrieve more documents
-                'fetch_k': 20,  # Larger candidate pool for MMR
-                'lambda_mult': 0.5  # Balance between relevance and diversity
-            }
-        )
+        # Create retriever
+        retriever = vectordb.as_retriever(search_kwargs={"k": 3})
         return retriever, vectordb
             
     except Exception as e:
