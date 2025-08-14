@@ -70,8 +70,8 @@ def create_vector_index(documents: List[Document]) -> Tuple[Any, Any]:
         
     # Enhanced text splitting with better chunking strategy
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=512,  # Smaller chunks for more focused retrieval
-        chunk_overlap=128,  # Increased overlap for better context
+        chunk_size=1000,  # Smaller chunks for more focused retrieval
+        chunk_overlap=200,  # Increased overlap for better context
         length_function=len,
         separators=["\n\n", "\n", ". ", " ", ""],  # Better separation of content
         is_separator_regex=False
