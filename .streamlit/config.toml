@@ -40,7 +40,8 @@ showWidgetBorder = true
 baseRadius = "0.75rem"
 buttonRadius = "full"
 font = "SpaceGrotesk"
-headingFontWeights = [800, 700, 700, 600, 600, 600]
+# Increased font weights for thicker text
+headingFontWeights = [700, 600, 600, 600, 600, 600]
 headingFontSizes = ["3rem", "2rem"]
 codeFont = "SpaceMono"
 codeFontSize = ".75rem"
