@@ -39,11 +39,9 @@ def show_api_config(api_keys: Dict[str, str]) -> bool:
     with st.sidebar.expander("API Key Status"):
         google_status = "✅" if api_keys["google_api_key"] else "❌"
         tavily_status = "✅" if api_keys["tavily_api_key"] else "❌"
-        cohere_status = "✅" if api_keys["cohere_api_key"] else "❌"
         
         st.write(f"{google_status} Google API Key")
         st.write(f"{tavily_status} Tavily API Key")
-        st.write(f"{cohere_status} Cohere API Key")
         
         if not all(api_keys.values()):
             st.error("Please provide all required API keys in the .env file")
@@ -52,9 +50,20 @@ def show_api_config(api_keys: Dict[str, str]) -> bool:
             
             GOOGLE_API_KEY=your_key_here
             TAVILY_API_KEY=your_key_here
-            COHERE_API_KEY=your_key_here
             """)
             return False
+    
+    # Add disclaimer expander
+    with st.sidebar.expander("⚠️ Important Notes"):
+        st.markdown("""
+        1. **Processing Time**: Larger documents may take longer to process. 
+           - The system needs time to analyze and index the content.
+           - Some context might be missed with very large documents.
+        
+        2. **PDF Compatibility**: 
+           - Some PDFs with complex layouts, scanned pages, or images may not be processed accurately.
+           - For best results, use text-based PDFs with clear formatting.
+        """)
     
     return True
 
