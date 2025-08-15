@@ -1,18 +1,17 @@
-# Langgraph Agentic RAG Chatbot
+# Langgraph Agentic RAG WebSearch Chatbot
 
 A powerful Retrieval-Augmented Generation (RAG) chatbot built with LangGraph, designed to provide accurate and context-aware responses by leveraging external knowledge sources.
 
-![Agent Demo](https://github.com/Bharath8080/Langgraph_Agentic_RAG_ChatBOT/blob/main/assets/langgraph.gif)
 
 ## 🌐 Live Demo
 
-Try out the live demo of the application: [LangGraph Agentic RAG Chatbot](https://langgraph-agentic-rag-chatbot.onrender.com)
+Try out the live demo of the application: [LangGraph Agentic RAG Chatbot](https://langgraphbot.streamlit.app/)
 
 ## 🚀 Features
 
 - **Agentic Architecture**: Built with LangGraph for complex, stateful conversation flows
 - **RAG Integration**: Retrieval-Augmented Generation for accurate, up-to-date responses
-- **Multi-LLM Support**: Compatible with various language models
+- **Multi-LLM Support**: Compatible with various language models (HuggingFace embeddings)
 - **Streamlit UI**: User-friendly web interface for easy interaction
 - **Tracing & Monitoring**: Integrated with LangSmith for observability
 
@@ -52,7 +51,6 @@ Try out the live demo of the application: [LangGraph Agentic RAG Chatbot](https:
    GROQ_API_KEY=your_groq_api_key
    GOOGLE_API_KEY=your_google_api_key
    TAVILY_API_KEY=your_tavily_api_key
-   COHERE_API_KEY=your_cohere_api_key
 
    # LangSmith Configuration
    LANGCHAIN_TRACING_V2=true
@@ -85,7 +83,7 @@ Try out the live demo of the application: [LangGraph Agentic RAG Chatbot](https:
 - **LangChain**: For orchestration of LLM components
 - **Streamlit**: For the web interface
 - **Tavily**: For web search capabilities
-- **Cohere**: For embeddings and language understanding
+- **HuggingFace**: For embeddings and language understanding
 - **LangSmith**: For monitoring and tracing
 
 ## 📝 License
