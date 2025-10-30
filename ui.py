@@ -160,7 +160,7 @@ def main():
     )
     
     # st.title("🤖 LangGraph RAG Agent with Gemini")
-    st.markdown(f"<h2 style='color: #f7f305;'>💬LangGraph RAG Agent with WebSearch</h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='color: #fa8d39;'>💬LangGraph RAG Agent with WebSearch</h2>", unsafe_allow_html=True)
     # st.markdown("An intelligent agent that can search your documents and the web using Google's Gemini models")
     
     # Initialize session state
