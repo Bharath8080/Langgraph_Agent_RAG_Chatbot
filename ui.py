@@ -160,7 +160,21 @@ def main():
     )
     
     # st.title("🤖 LangGraph RAG Agent with Gemini")
-    st.markdown(f"<h2 style='color: #0702fa;'>💬LangGraph RAG Agent with WebSearch</h2>", unsafe_allow_html=True)
+    st.markdown(f"""
+    <style>
+        .gradient-text {{
+            background: linear-gradient(to right, #F96167, #FCE77D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2em; /* Example: Adjust font size as needed */
+            font-weight: bold;
+            display: inline-block;
+        }}
+    </style>
+    <div style='text-align: center; margin-bottom: 2rem;'>
+        <span class="gradient-text">LangGraph RAG Agent with WebSearch</span>
+    </div>
+    """, unsafe_allow_html=True)
     # st.markdown("An intelligent agent that can search your documents and the web using Google's Gemini models")
     
     # Initialize session state
