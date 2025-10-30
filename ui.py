@@ -156,7 +156,7 @@ def main():
     st.set_page_config(
         page_title="LangGraph RAG Agent with Gemini",
         page_icon="🤖",
-        layout="wide"
+        layout="centered"
     )
     
     # st.title("🤖 LangGraph RAG Agent with Gemini")
